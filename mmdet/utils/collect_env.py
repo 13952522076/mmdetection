@@ -49,7 +49,8 @@ def collect_env():
 
     env_info['TorchVision'] = torchvision.__version__
 
-    env_info['OpenCV'] = cv2.__version__
+    # env_info['OpenCV'] = cv2.__version__
+    env_info['OpenCV'] = '0.4.0'
 
     env_info['MMCV'] = mmcv.__version__
     env_info['MMDetection'] = mmdet.__version__
