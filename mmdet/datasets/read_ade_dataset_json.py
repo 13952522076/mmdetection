@@ -16,7 +16,7 @@ def read_dataset(dataset_file):
 
 
 
-dataset_prefix = '/home/g1007540910/mmdetection/data/ADE20k_cocostyle/annotations/val.jason'
+dataset_prefix = '/home/g1007540910/mmdetection/data/ADE20k_cocostyle/annotations/val.json'
 
 
 read_dataset(dataset_prefix)
