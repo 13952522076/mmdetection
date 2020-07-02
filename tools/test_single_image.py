@@ -21,7 +21,7 @@ import matplotlib.cm as cm
 
 def vis_seg(data, result, img_norm_cfg, data_id, colors, score_thr, save_dir):
     img_tensor = data['img'][0]
-    print(data)
+    # print(data)
     img_metas = data['img_metas'][0]
     imgs = tensor2imgs(img_tensor, **img_norm_cfg)
     assert len(imgs) == len(img_metas)
@@ -34,7 +34,8 @@ def vis_seg(data, result, img_norm_cfg, data_id, colors, score_thr, save_dir):
         img_show = img[:h, :w, :]
 
         seg_label = cur_result[0]
-        seg_label = seg_label.cpu().numpy().astype(np.uint8)
+        # seg_label = seg_label.cpu().numpy().astype(np.uint8)
+        seg_label = seg_label.astype(np.uint8)
         cate_label = cur_result[1]
         cate_label = cate_label.cpu().numpy()
         score = cur_result[2].cpu().numpy()
