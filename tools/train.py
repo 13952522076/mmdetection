@@ -3,6 +3,7 @@ import copy
 import os
 import os.path as osp
 import time
+import traceback
 
 import mmcv
 import torch
@@ -150,4 +151,13 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except Exception as e:
+        print("Error Happens:")
+        print(e)
+        traceback.print_exc()
+        os.system("sudo poweroff")
+    print("DONE, FINISHED!!!")
+    os.system("sudo poweroff")
+    # main()

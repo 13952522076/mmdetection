@@ -55,3 +55,4 @@ data = dict(
         img_prefix=data_root + 'val/',
         pipeline=test_pipeline))
 evaluation = dict(metric=['bbox', 'segm'])
+work_dir = './work_dirs/mask_rcnn_r50_fpn_2x_ade20k'
