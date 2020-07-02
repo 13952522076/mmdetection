@@ -1,0 +1,62 @@
+{
+	"images": 
+		[
+			{
+				"file_name": "ADE_val_00000001.jpg", 
+				"height": 960, "width": 1280, "id": 1
+			}, {
+				"file_name": "ADE_val_00000002.jpg", "height": 364, "width": 500, "id": 2
+			}, {
+				"file_name": "ADE_val_00001001.jpg", "height": 3456, "width": 2592, "id": 3
+			}{
+				"file_name": "ADE_val_00001933.jpg", "height": 1536, "width": 2048, "id": 1999
+			}, {
+				"file_name": "ADE_val_00000934.jpg", "height": 1488, "width": 1984, "id": 2000
+			}
+		], 
+	"type": "instances", 
+	"annotations": [
+		{
+			"segmentation": [[0, 0, 0, 587, 1, 587, 1, 583, 2, 582, 29, 582, 30, 581]], 
+			"area": 472859, 
+			"iscrowd": 0, 
+			"image_id": 1, 
+			"bbox": 
+			[0, 0, 1278, 667], 
+			"category_id": 8, 
+			"id": 1, "ignore": 0
+		}, {
+			"segmentation": [[1233, 1039, 947, 1034, 947, 1033, 948, 1028, 948, 1027, 949, 1023, 949, 1022, 950, 1017, 950, 1016, 951, 1011, 951, 1010, 952, 1005, 952, 1004,1277, 955, 1277, 924, 1278, 923]], 
+			"area": 6176, 
+			"iscrowd": 0, 
+			"image_id": 1,
+			"bbox": [976, 923, 303, 36], 
+			"category_id": 41, "id": 2, "ignore": 0
+		}, {
+			"segmentation": [[319, 647, 794, 648, 795, 649, 795, 650, 794, 652, 794, 652, 777, 651, 776, 651, 759, 650, 758, 650, 741, 649, 740, 649, 725, 645, 725, 644, 724, 597, 724, 596, 723, 548, 723, 547, 722, 500, 722, 499, 721, 452, 721, 451, 720, 403, 720, 402, 719, 355, 719, 354, 718]], 
+			"area": 51155, 
+			"iscrowd": 0, 
+			"image_id": 1, 
+			"bbox": [0, 718, 653, 97],
+			"category_id": 14, "id": 3, "ignore": 0
+		}, 
+		{
+		 	"segmentation": [[1694, 1705, 679, 1704, 678, 1700, 678, 1699, 677]], "area": 23297, "iscrowd": 0, "image_id": 2000, "bbox": [1563, 677, 236, 177], 
+		 	"category_id": 37, 
+		 	"id": 43144, 
+		 	"ignore": 0}
+ 		], 
+ 	"categories": [
+ 		{
+ 			"supercategory": "none", 
+ 			"id": 1, 
+ 			"name": "trees"
+ 		}, {
+ 			"supercategory": "none", 
+ 			"id": 2, 
+ 			"name": "tree"
+ 		}
+ 	]
+ }
+
+
