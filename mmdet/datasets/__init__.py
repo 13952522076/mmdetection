@@ -4,6 +4,7 @@ from .coco import CocoDataset
 from .custom import CustomDataset
 from .dataset_wrappers import (ClassBalancedDataset, ConcatDataset,
                                RepeatDataset)
+from .ade20k import ADE20kDataset
 from .deepfashion import DeepFashionDataset
 from .lvis import LVISDataset
 from .samplers import DistributedGroupSampler, DistributedSampler, GroupSampler
@@ -18,5 +19,5 @@ __all__ = [
     'CityscapesDataset', 'LVISDataset', 'DeepFashionDataset', 'GroupSampler',
     'DistributedGroupSampler', 'DistributedSampler', 'build_dataloader',
     'ConcatDataset', 'RepeatDataset', 'ClassBalancedDataset',
-    'WIDERFaceDataset', 'DATASETS', 'PIPELINES', 'build_dataset'
+    'WIDERFaceDataset', 'DATASETS', 'PIPELINES', 'build_dataset','ADE20kDataset'
 ]
