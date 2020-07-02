@@ -37,8 +37,9 @@ def vis_seg(data, result, img_norm_cfg, data_id, colors, score_thr, save_dir):
         # seg_label = seg_label.cpu().numpy().astype(np.uint8)
         seg_label = seg_label.astype(np.uint8)
         cate_label = cur_result[1]
-        cate_label = cate_label.cpu().numpy()
-        score = cur_result[2].cpu().numpy()
+        # cate_label = cate_label.cpu().numpy()
+        # score = cur_result[2].cpu().numpy()
+        score = cur_result[2]
 
         vis_inds = score > score_thr
         seg_label = seg_label[vis_inds]
