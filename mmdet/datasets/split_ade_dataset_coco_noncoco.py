@@ -69,3 +69,5 @@ suffix = (
 
 for s in suffix:
     split_dataset(dataset_prefix + s, voc_inds, split1_prefix + s, split2_prefix + s)
+
+
