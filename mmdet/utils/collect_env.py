@@ -47,10 +47,10 @@ def collect_env():
     env_info['PyTorch'] = torch.__version__
     env_info['PyTorch compiling details'] = torch.__config__.show()
 
-    env_info['TorchVision'] = torchvision.__version__
+    # env_info['TorchVision'] = torchvision.__version__
+    env_info['TorchVision'] = '0.4.0'
 
-    # env_info['OpenCV'] = cv2.__version__
-    env_info['OpenCV'] = '0.4.0'
+    env_info['OpenCV'] = cv2.__version__
 
     env_info['MMCV'] = mmcv.__version__
     env_info['MMDetection'] = mmdet.__version__
