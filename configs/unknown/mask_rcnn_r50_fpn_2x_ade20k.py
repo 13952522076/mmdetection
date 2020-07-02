@@ -46,12 +46,12 @@ data = dict(
         pipeline=train_pipeline),
     val=dict(
         type=dataset_type,
-        ann_file=data_root + 'annotations/val.json',
+        ann_file=data_root + 'annotations/split_coco_val.json.json',
         img_prefix=data_root + 'val/',
         pipeline=test_pipeline),
     test=dict(
         type=dataset_type,
-        ann_file=data_root + 'annotations/val.json',
+        ann_file=data_root + 'annotations/split_coco_val.json.json',
         img_prefix=data_root + 'val/',
         pipeline=test_pipeline))
 evaluation = dict(metric=['bbox', 'segm'])
