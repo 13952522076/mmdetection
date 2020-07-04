@@ -39,26 +39,22 @@ class ADE20kDataset(CustomDataset):
     #            'vase', 'scissors', 'teddy bear', 'hair drier', 'toothbrush')
 
     # ADE20K class name, referring:
-    # https://github.com/CSAILVision/semantic-segmentation-pytorch/blob/master/data/object150_info.csv
-    # I drop out the secondary name for better visulization.
-    CLASSES = ('wall', 'building', 'sky', 'floor', 'tree', 'ceiling', 'road', 'bed', 'windowpane',
-               'grass', 'cabinet', 'sidewalk', 'person', 'earth', 'door', 'table', 'mountain', 'plant',
-               'curtain', 'chair', 'car', 'water', 'painting', 'sofa', 'shelf', 'house', 'sea',
-               'mirror', 'rug', 'field', 'armchair', 'seat', 'fence', 'desk', 'rock', 'wardrobe',
-               'lamp', 'bathtub', 'railing', 'cushion', 'base', 'box', 'column', 'signboard', 'chest',
-               'counter', 'sand', 'sink', 'skyscraper', 'fireplace', 'refrigerator', 'grandstand',
-               'path', 'stairs', 'runway', 'case', 'pool', 'pillow', 'screen', 'stairway', 'river',
-               'bridge', 'bookcase', 'blindscreen', 'coffee', 'toilet', 'flower', 'book', 'hill',
-               'bench', 'countertop', 'stove', 'tree', 'kitchen', 'computer', 'chair', 'boat', 'bar',
-               'arcade', 'hovel', 'bus', 'towel', 'light', 'truck', 'tower', 'chandelier', 'awning',
-               'streetlight', 'booth', 'television', 'airplane', 'dirt', 'apparel', 'pole', 'land',
-               'bannister', 'escalator', 'ottoman', 'bottle', 'buffet', 'poster', 'stage', 'van',
-               'ship', 'fountain', 'conveye', 'canopy', 'washer', 'plaything', 'swimming', 'stool',
-               'barrel', 'basket', 'waterfall', 'tent', 'bag', 'minibike', 'cradle', 'oven', 'ball',
-               'food', 'stair', 'tank', 'trade', 'microwave', 'pot', 'animal', 'bicycle', 'lake',
-               'dishwasher', 'screen', 'blanket', 'sculpture', 'hood', 'sconce', 'vase', 'traffic',
-               'tray', 'ashcan', 'fan', 'pier', 'screen', 'plate', 'monitor', 'bulletin', 'shower',
-               'radiator', 'glass', 'clock', 'flag')
+    # https://github.com/CSAILVision/placeschallenge/tree/master/instancesegmentation
+    CLASSES = ("bed", "windowpane", "cabinet", "person", "door", "table", "curtain",
+               "chair", "car", "painting", "sofa", "shelf", "mirror", "armchair", "seat",
+               "fence", "desk", "wardrobe", "lamp", "bathtub", "railing", "cushion", "box",
+               "column", "signboard", "chest of drawers", "counter", "sink", "fireplace",
+               "refrigerator", "stairs", "case", "pool table", "pillow", "screen door",
+               "bookcase", "coffee table", "toilet", "flower", "book", "bench", "countertop",
+               "stove", "palm", "kitchen island", "computer", "swivel chair", "boat",
+               "arcade machine", "bus", "towel", "light", "truck", "chandelier", "awning",
+               "streetlight", "booth", "television receiver", "airplane", "apparel",
+               "pole", "bannister", "ottoman", "bottle", "van", "ship", "fountain",
+               "washer", "plaything", "stool", "barrel", "basket", "bag", "minibike",
+               "oven", "ball", "food", "step", "trade name", "microwave", "pot", "animal",
+               "bicycle", "dishwasher", "screen", "sculpture", "hood", "sconce", "vase",
+               "traffic light", "tray", "ashcan", "fan", "plate", "monitor", "bulletin board",
+               "radiator", "glass", "clock", "flag")
 
     def load_annotations(self, ann_file):
         """Load annotation from COCO style annotation file.
@@ -72,6 +68,15 @@ class ADE20kDataset(CustomDataset):
 
         self.coco = COCO(ann_file)
         self.cat_ids = self.coco.get_cat_ids(cat_names=self.CLASSES)
+        # for mapping ADE20K to COCO
+        # For unmatched ids, we pad with 80.
+        self.cat_ids = [60, 80, 80, 1, 80, 61, 80, 57, 3, 80, 80, 80, 80, 80, 80,
+                        80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 72, 80, 73,
+                        80, 80, 80, 80, 80, 80, 80, 62, 80, 74, 14, 80, 80, 80, 80,
+                        64, 80, 9, 80, 6, 80, 80, 8, 80, 80, 80, 80, 80, 5, 80, 80,
+                        80, 80, 40, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 70, 33,
+                        80, 80, 80, 69, 80, 80, 2, 80, 63, 80, 80, 80, 76, 10, 80, 80,
+                        80, 80, 80, 80, 80, 80, 75, 80]
         self.cat2label = {cat_id: i for i, cat_id in enumerate(self.cat_ids)}
         self.img_ids = self.coco.get_img_ids()
         data_infos = []
