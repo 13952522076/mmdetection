@@ -450,6 +450,7 @@ class ADE20kDataset(CustomDataset):
                 raise KeyError(f'{metric} is not in results')
             try:
                 cocoDt = cocoGt.loadRes(result_files[metric])
+                print("cocoDt: {}".format(cocoDt))
             except IndexError:
                 print_log(
                     'The testing results of the whole dataset is empty.',
