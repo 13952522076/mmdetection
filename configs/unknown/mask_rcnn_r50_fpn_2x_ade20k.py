@@ -6,7 +6,7 @@ _base_ = [
 ]
 
 dataset_type = 'ADE20kDataset'
-data_root = 'data/ADE20k_cocostyle/'
+data_root = 'data/ADE20K/'
 img_norm_cfg = dict(
     # refer https://github.com/CSAILVision/semantic-segmentation-pytorch/blob/master/mit_semseg/dataset.py
     # get the same mean / std values.
@@ -41,18 +41,18 @@ data = dict(
     workers_per_gpu=2,
     train=dict(
         type=dataset_type,
-        ann_file=data_root + 'annotations/train.json',
-        img_prefix=data_root + 'train/',
+        ann_file=data_root + 'annotations/instance_training_gts.json',
+        img_prefix=data_root + '/images/training/',
         pipeline=train_pipeline),
     val=dict(
         type=dataset_type,
-        ann_file=data_root + 'annotations/val.json',
-        img_prefix=data_root + 'val/',
+        ann_file=data_root + 'annotations/instance_validation_gts.json',
+        img_prefix=data_root + '/images/validation/',
         pipeline=test_pipeline),
     test=dict(
         type=dataset_type,
-        ann_file=data_root + 'annotations/val.json',
-        img_prefix=data_root + 'val/',
+        ann_file=data_root + 'annotations/instance_validation_gts.json',
+        img_prefix=data_root + '/images/validation/',
         pipeline=test_pipeline))
 evaluation = dict(metric=['bbox', 'segm'])
 work_dir = './work_dirs/mask_rcnn_r50_fpn_2x_ade20k'
