@@ -465,6 +465,8 @@ class ADE20kDataset(CustomDataset):
 
             iou_type = 'bbox' if metric == 'proposal' else metric
             cocoEval = COCOeval(cocoGt, cocoDt, iou_type)
+            print("cocoGt: {}".format(cocoGt))
+            print("cocoDt: {}".format(cocoDt))
             cocoEval.params.catIds = self.cat_ids
             cocoEval.params.imgIds = self.img_ids
             if metric == 'proposal':
