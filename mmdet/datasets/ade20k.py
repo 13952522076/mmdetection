@@ -68,15 +68,6 @@ class ADE20kDataset(CustomDataset):
 
         self.coco = COCO(ann_file)
         self.cat_ids = self.coco.get_cat_ids(cat_names=self.CLASSES)
-        # for mapping ADE20K to COCO
-        # For unmatched ids, we pad with 80.
-        self.cat_ids = [60, 80, 80, 1, 80, 61, 80, 57, 3, 80, 80, 80, 80, 80, 80,
-                        80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 72, 80, 73,
-                        80, 80, 80, 80, 80, 80, 80, 62, 80, 74, 14, 80, 80, 80, 80,
-                        64, 80, 9, 80, 6, 80, 80, 8, 80, 80, 80, 80, 80, 5, 80, 80,
-                        80, 80, 40, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 70, 33,
-                        80, 80, 80, 69, 80, 80, 2, 80, 63, 80, 80, 80, 76, 10, 80, 80,
-                        80, 80, 80, 80, 80, 80, 75, 80]
         self.cat2label = {cat_id: i for i, cat_id in enumerate(self.cat_ids)}
         self.img_ids = self.coco.get_img_ids()
         data_infos = []
@@ -465,8 +456,6 @@ class ADE20kDataset(CustomDataset):
 
             iou_type = 'bbox' if metric == 'proposal' else metric
             cocoEval = COCOeval(cocoGt, cocoDt, iou_type)
-            print("cocoGt: {}".format(cocoGt))
-            print("cocoDt: {}".format(cocoDt))
             cocoEval.params.catIds = self.cat_ids
             cocoEval.params.imgIds = self.img_ids
             if metric == 'proposal':
