@@ -8,7 +8,7 @@ _base_ = [
 # model settings
 model = dict(
     type='MaskRCNN',
-    pretrained='modelzoo://resnet50',
+    pretrained='torchvision://resnet50',
     backbone=dict(
         type='ResNet',
         depth=50,
