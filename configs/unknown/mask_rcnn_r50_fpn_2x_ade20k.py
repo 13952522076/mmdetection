@@ -46,13 +46,13 @@ data = dict(
         pipeline=train_pipeline),
     val=dict(
         type=dataset_type,
-        ann_file=data_root + 'annotations/instance_validation_2coco.json',
+        ann_file=data_root + 'annotations/instance_validation_gts.json',
         img_prefix=data_root + '/images/validation/',
         pipeline=test_pipeline),
     test=dict(
         type=dataset_type,
-        ann_file=data_root + 'annotations/instance_validation_2coco.json',
+        ann_file=data_root + 'annotations/instance_validation_gts.json',
         img_prefix=data_root + '/images/validation/',
         pipeline=test_pipeline))
-evaluation = dict(metric=['bbox', 'segm'])
+evaluation = dict(metric=['segm'])
 work_dir = './work_dirs/mask_rcnn_r50_fpn_2x_ade20k'
