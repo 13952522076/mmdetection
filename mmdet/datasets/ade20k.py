@@ -422,6 +422,9 @@ class ADE20kDataset(CustomDataset):
                 raise KeyError(f'metric {metric} is not supported')
 
         result_files, tmp_dir = self.format_results(results, jsonfile_prefix)
+        my_result_files,my_temp_dir = self.format_results(results,'my_temp_dict')
+        print("my_result_files: {}".format(my_result_files))
+        print("my_temp_dir: {}".format(my_temp_dir))
 
         eval_results = {}
         cocoGt = self.coco
@@ -446,7 +449,6 @@ class ADE20kDataset(CustomDataset):
                 raise KeyError(f'{metric} is not in results')
             try:
                 cocoDt = cocoGt.loadRes(result_files[metric])
-                print("cocoDt: {}".format(cocoDt))
             except IndexError:
                 print_log(
                     'The testing results of the whole dataset is empty.',
