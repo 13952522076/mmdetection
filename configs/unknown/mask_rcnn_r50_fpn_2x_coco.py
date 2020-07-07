@@ -47,13 +47,13 @@ data = dict(
     val=dict(
         type=dataset_type,
         # ann_file=data_root + 'annotations/instance_validation_gts.json',
-        ann_file=data_root + 'annotations/instance_validation_split_ade28classes.json',
+        ann_file=data_root + 'annotations/instance_validation_split_23classes.json',
         img_prefix=data_root + '/images/validation/',
         pipeline=test_pipeline),
     test=dict(
         type=dataset_type,
         # ann_file=data_root + 'annotations/instance_validation_gts.json',
-        ann_file=data_root + 'annotations/instance_validation_split_ade28classes.json',
+        ann_file=data_root + 'annotations/instance_validation_split_23classes.json',
         img_prefix=data_root + '/images/validation/',
         pipeline=test_pipeline))
 evaluation = dict(metric=['segm'])

@@ -373,7 +373,8 @@ class ADE20kCOCODataset(CustomDataset):
                     data['image_id'] = img_id
                     data['bbox'] = self.xyxy2xywh(bboxes[i])
                     data['score'] = float(mask_score[i])
-                    data['category_id'] = self.cat_ids[label]
+                    cat_id = self.cat_ids[label]
+                    data['category_id'] = self._cocoid2adeid(cat_id)
                     if isinstance(segms[i]['counts'], bytes):
                         segms[i]['counts'] = segms[i]['counts'].decode()
                     data['segmentation'] = segms[i]
@@ -510,9 +511,6 @@ class ADE20kCOCODataset(CustomDataset):
                 raise KeyError(f'metric {metric} is not supported')
 
         result_files, tmp_dir = self.format_results(results, jsonfile_prefix)
-        my_result_files,my_temp_dir = self.format_results(results,'my_temp_dict')
-        print("my_result_files: {}".format(my_result_files))
-        print("my_temp_dir: {}".format(my_temp_dir))
 
         eval_results = {}
         cocoGt = self.coco
