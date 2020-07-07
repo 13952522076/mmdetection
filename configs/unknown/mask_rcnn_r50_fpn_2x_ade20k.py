@@ -175,13 +175,13 @@ data = dict(
     val=dict(
         type=dataset_type,
         # ann_file=data_root + 'annotations/instance_validation_gts.json',
-        ann_file=data_root + 'annotations/instance_validation_2coco_split_coco.json',
+        ann_file=data_root + 'annotations/instance_validation_gts.json',
         img_prefix=data_root + '/images/validation/',
         pipeline=test_pipeline),
     test=dict(
         type=dataset_type,
         # ann_file=data_root + 'annotations/instance_validation_gts.json',
-        ann_file=data_root + 'annotations/instance_validation_2coco_split_coco.json',
+        ann_file=data_root + 'annotations/instance_validation_gts.json',
         img_prefix=data_root + '/images/validation/',
         pipeline=test_pipeline))
 evaluation = dict(metric=['segm'])
