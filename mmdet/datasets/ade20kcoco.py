@@ -14,14 +14,14 @@ from mmdet.core import eval_recalls
 from .builder import DATASETS
 from .custom import CustomDataset
 
-# A dataset for ADE20k dataset.
+# A dataset for ADE20k dataset and COCO translation.
 # We translate the ADE20k dataset to a MS COCO style.
 # Hence, the dataset is following the coco.py
 # Created by Xu Ma, July
 
 
 @DATASETS.register_module()
-class ADE20kDataset(CustomDataset):
+class ADE20kCOCODataset(CustomDataset):
 
     # CLASSES = ('person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus',
     #            'train', 'truck', 'boat', 'traffic light', 'fire hydrant',
@@ -55,6 +55,92 @@ class ADE20kDataset(CustomDataset):
                "bicycle", "dishwasher", "screen", "sculpture", "hood", "sconce", "vase",
                "traffic light", "tray", "ashcan", "fan", "plate", "monitor", "bulletin board",
                "radiator", "glass", "clock", "flag")
+
+    def _cocoid2adeid(self,cat_id):
+        cat_mapping = {
+            1: 4,
+            2: 83,
+            3: 9,
+            4: 0,
+            5: 59,
+            6: 50,
+            7: 0,
+            8: 53,
+            9: 48,
+            10: 90,
+            11: 0,
+            12: 25,
+            13: 0,
+            14: 41,
+            15: 82,
+            16: 82,
+            17: 82,
+            18: 82,
+            19: 82,
+            20: 82,
+            21: 82,
+            22: 82,
+            23: 82,
+            24: 82,
+            25: 73,
+            26: 0,
+            27: 0,
+            28: 0,
+            29: 0,
+            30: 0,
+            31: 0,
+            32: 0,
+            33: 76,
+            34: 0,
+            35: 0,
+            36: 0,
+            37: 0,
+            38: 0,
+            39: 0,
+            40: 64,
+            41: 0,
+            42: 0,
+            43: 0,
+            44: 0,
+            45: 0,
+            46: 0,
+            47: 77,
+            48: 77,
+            49: 77,
+            50: 77,
+            51: 77,
+            52: 77,
+            53: 77,
+            54: 77,
+            55: 77,
+            56: 77,
+            57: 8,
+            58: 11,
+            59: 0,
+            60: 1,
+            61: 6,
+            62: 38,
+            63: 85,
+            64: 46,
+            65: 0,
+            66: 0,
+            67: 0,
+            68: 0,
+            69: 80,
+            70: 75,
+            71: 0,
+            72: 28,
+            73: 30,
+            74: 0,
+            75: 99,
+            76: 89,
+            77: 0,
+            78: 0,
+            79: 0,
+            80: 0
+        }
+        return cat_mapping[cat_id]
+
 
     def load_annotations(self, ann_file):
         """Load annotation from COCO style annotation file.
@@ -250,7 +336,8 @@ class ADE20kDataset(CustomDataset):
                     data['image_id'] = img_id
                     data['bbox'] = self.xyxy2xywh(bboxes[i])
                     data['score'] = float(bboxes[i][4])
-                    data['category_id'] = self.cat_ids[label]
+                    cat_id = self.cat_ids[label]
+                    data['category_id'] = self._cocoid2adeid(cat_id)
                     json_results.append(data)
         return json_results
 
@@ -269,7 +356,8 @@ class ADE20kDataset(CustomDataset):
                     data['image_id'] = img_id
                     data['bbox'] = self.xyxy2xywh(bboxes[i])
                     data['score'] = float(bboxes[i][4])
-                    data['category_id'] = self.cat_ids[label]
+                    cat_id =  self.cat_ids[label]
+                    data['category_id'] = self._cocoid2adeid(cat_id)
                     bbox_json_results.append(data)
 
                 # segm results
@@ -422,6 +510,9 @@ class ADE20kDataset(CustomDataset):
                 raise KeyError(f'metric {metric} is not supported')
 
         result_files, tmp_dir = self.format_results(results, jsonfile_prefix)
+        my_result_files,my_temp_dir = self.format_results(results,'my_temp_dict')
+        print("my_result_files: {}".format(my_result_files))
+        print("my_temp_dir: {}".format(my_temp_dir))
 
         eval_results = {}
         cocoGt = self.coco

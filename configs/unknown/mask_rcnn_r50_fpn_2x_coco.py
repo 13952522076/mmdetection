@@ -5,7 +5,7 @@ _base_ = [
     '../_base_/default_runtime.py'
 ]
 
-dataset_type = 'ADE20kDataset'
+dataset_type = 'ADE20kCOCODataset'
 data_root = 'data/ADE20K/'
 img_norm_cfg = dict(
     # refer https://github.com/CSAILVision/semantic-segmentation-pytorch/blob/master/mit_semseg/dataset.py
