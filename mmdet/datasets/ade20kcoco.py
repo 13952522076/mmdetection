@@ -593,7 +593,7 @@ class ADE20kCOCODataset(CustomDataset):
 
                 cocoEval._prepare()
                 cocoEval.evaluate()
-                print("evaluateImg is : {}".format(cocoEval.evaluateImg))
+                print("evalImgs is : {}".format(cocoEval.evalImgs))
 
                 print("cocoEval.params.iouType is {}".format(cocoEval.params.iouType))
 
