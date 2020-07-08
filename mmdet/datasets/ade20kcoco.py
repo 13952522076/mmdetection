@@ -592,9 +592,8 @@ class ADE20kCOCODataset(CustomDataset):
                 ###debug xuma ###
 
                 cocoEval._prepare()
-                print("cocoEval._gts is {}".format(cocoEval._gts))
-                print("cocoEval._dts is {}".format(cocoEval._dts))
-                print("cocoEval.params is {}".format(cocoEval.params))
+
+                print("cocoEval.params.iouType is {}".format(cocoEval.params.iouType))
 
                 ######
                 cocoEval.evaluate()
