@@ -361,6 +361,8 @@ class ADE20kCOCODataset(CustomDataset):
                     data['score'] = float(bboxes[i][4])
                     cat_id = self.cat_ids[label]
                     data['category_id'] = self._cocoid2adeid(cat_id)
+                    if data['category_id'] !=100:
+                        continue # here we just focus on unkown objetcts
                     json_results.append(data)
         return json_results
 
@@ -381,6 +383,8 @@ class ADE20kCOCODataset(CustomDataset):
                     data['score'] = float(bboxes[i][4])
                     cat_id =  self.cat_ids[label]
                     data['category_id'] = self._cocoid2adeid(cat_id)
+                    if data['category_id'] !=100:
+                        continue # here we just focus on unkown objetcts
                     bbox_json_results.append(data)
 
                 # segm results
