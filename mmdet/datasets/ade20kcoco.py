@@ -381,10 +381,10 @@ class ADE20kCOCODataset(CustomDataset):
                     data['image_id'] = img_id
                     data['bbox'] = self.xyxy2xywh(bboxes[i])
                     data['score'] = float(bboxes[i][4])
-                    cat_id =  self.cat_ids[label]
+                    cat_id = self.cat_ids[label]
                     data['category_id'] = self._cocoid2adeid(cat_id)
-                    if data['category_id'] !=100:
-                        continue # here we just focus on unkown objetcts
+                    # if data['category_id'] !=100:
+                    #     continue # here we just focus on unkown objetcts
                     bbox_json_results.append(data)
 
                 # segm results
@@ -402,13 +402,12 @@ class ADE20kCOCODataset(CustomDataset):
                     data['score'] = float(mask_score[i])
                     cat_id = self.cat_ids[label]
                     data['category_id'] = self._cocoid2adeid(cat_id)
-                    if data['category_id'] !=100:
-                        continue # here we just focus on unkown objetcts
+                    # if data['category_id'] !=100:
+                    #     continue # here we just focus on unkown objetcts
                     if isinstance(segms[i]['counts'], bytes):
                         segms[i]['counts'] = segms[i]['counts'].decode()
                     data['segmentation'] = segms[i]
                     segm_json_results.append(data)
-        print("seg instances number: {}".format(segm_json_results.__len__()))
         return bbox_json_results, segm_json_results
 
     def results2json(self, results, outfile_prefix):
@@ -590,6 +589,14 @@ class ADE20kCOCODataset(CustomDataset):
                     val = float(f'{cocoEval.stats[i + 6]:.3f}')
                     eval_results[item] = val
             else:
+                ###debug xuma ###
+
+                cocoEval._prepare()
+                print("cocoEval._gts is {}".format(cocoEval._gts))
+                print("cocoEval._dts is {}".format(cocoEval._dts))
+                print("cocoEval.params is {}".format(cocoEval.params))
+
+                ######
                 cocoEval.evaluate()
                 cocoEval.accumulate()
                 cocoEval.summarize()

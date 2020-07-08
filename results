@@ -102,4 +102,16 @@ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.444
 
 instance_validation_unknown_23classes.json
 #files: 2000, #instances: 14178
-
+# Output: detected 18721 unknown objects.
+Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.021
+Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.040
+Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.018
+Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.015
+Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.019
+Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.030
+Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.013
+Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.050
+Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.073
+Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.064
+Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.082
+Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.080
