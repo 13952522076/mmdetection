@@ -128,9 +128,9 @@ split_id_23classes = [4, 83, 9, 59, 50, 53, 48, 90, 41,
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Evaluation demo')
-    parser.add_argument('--ann_dir', default='C:\\Users\\xuma\\Documents\\ADE20K\\annotations_instance\\validation')  # CHANGE ACCORDINGLY
-    parser.add_argument('--imgCatIdsFile', default='C:\\Users\\xuma\\Documents\\ADE20K\\imgCatIds.json')
-    parser.add_argument('--output_json', default='C:\\Users\\xuma\\Documents\\ADE20K\\annotations\\instance_validation_unknown_23classes.json')
+    parser.add_argument('--ann_dir', default='/Users/melody/Downloads/annotations_instance/validation')  # CHANGE ACCORDINGLY
+    parser.add_argument('--imgCatIdsFile', default='/Users/melody/Downloads/imgCatIds.json')
+    parser.add_argument('--output_json', default='/Users/melody/Downloads/instance_validation_only_unknown_23classes.json')
     # parser.add_argument('--parsing_2coco', action='store_true', help='Parsing ADE20K cat_id to COCO id.')
     parser.add_argument('--parsing_unknown', default='True', action='store_true',
                         help='Parsing ADE20K cat_id to COCO known and unknown.')
@@ -208,7 +208,7 @@ def convert(args):
 
     data_out = {'categories': categories, 'images': images, 'annotations': annotations}
     with open(args.output_json, 'w') as f:
-        json.dump(str(data_out), f)
+        json.dump(data_out, f)
 
 
 if __name__ == '__main__':
