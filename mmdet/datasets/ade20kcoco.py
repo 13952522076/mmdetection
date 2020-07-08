@@ -592,8 +592,9 @@ class ADE20kCOCODataset(CustomDataset):
                 ###debug xuma ###
 
                 cocoEval._prepare()
-                print("IOU is : {}".format(cocoEval.ious))
                 cocoEval.evaluate()
+                print("IOU is : {}".format(cocoEval.ious))
+
                 print("cocoEval.params.iouType is {}".format(cocoEval.params.iouType))
 
                 ######
