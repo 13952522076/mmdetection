@@ -402,10 +402,13 @@ class ADE20kCOCODataset(CustomDataset):
                     data['score'] = float(mask_score[i])
                     cat_id = self.cat_ids[label]
                     data['category_id'] = self._cocoid2adeid(cat_id)
+                    if data['category_id'] !=100:
+                        continue # here we just focus on unkown objetcts
                     if isinstance(segms[i]['counts'], bytes):
                         segms[i]['counts'] = segms[i]['counts'].decode()
                     data['segmentation'] = segms[i]
                     segm_json_results.append(data)
+        print("seg instances number: {}".format(segm_json_results.__len__()))
         return bbox_json_results, segm_json_results
 
     def results2json(self, results, outfile_prefix):
