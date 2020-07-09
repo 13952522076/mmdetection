@@ -176,8 +176,8 @@ class ADE20kCOCODataset(CustomDataset):
         all_unknown_2_known = 0
         all_detected_objects = 0
         all_labeled_objects = 0
-        str = "img_id\t gt\t dt\t k_det\t unk_det\t " \
-              "k_undet\t unk_undet\t k_2_unk\t unk_2_k\t \n"
+        str = "img_id\t gt\t dt\t k_d\t uk_d\t " \
+              "k_ud\t uk_ud\t k_2_uk\t uk_2_k\t \n"
 
         for i in range(0,len(imageIds)):
 
