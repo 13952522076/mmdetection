@@ -169,17 +169,39 @@ class ADE20kCOCODataset(CustomDataset):
         imageIds = cocoEval.params.imgIds
         categoryIds = cocoEval.params.catIds
         for i in range(0,len(imageIds)):
+            unknown_detected = 0
+            unknown_undetected = 0
+            known_detected = 0
+            known_undetected = 0
+            known_2_unknown = 0
+            unknown_2_known = 0
+
             all_dt = [_ for cId in cocoEval.params.catIds for _ in cocoEval._dts[imageIds[i], cId]]
             all_gt = [_ for cId in cocoEval.params.catIds for _ in cocoEval._gts[imageIds[i], cId]]
             if len(all_gt) !=0 and len(all_dt)!=0:
                 for g in all_gt:
                     for d in all_dt:
-                        iou = maskUtils.iou(d, g, 0)
+                        iou = maskUtils.iou([d['segmentation']], [g['segmentation']], [0])[0][0]
                         g_category_id = g['category_id']
                         d_category_id = g['category_id']
-                        print(iou)
-            else:
-                print(None)
+                        if g_category_id==d_category_id and g_category_id==100:
+                            if iou>=iou_thr:
+                                unknown_detected = unknown_detected+1
+                            else:
+                                unknown_undetected = unknown_undetected+1
+                        if g_category_id == d_category_id and g_category_id != 100:
+                            if iou>=iou_thr:
+                                known_detected = known_detected+1
+                            else:
+                                known_undetected = known_undetected+1
+                        if g_category_id != d_category_id and g_category_id != 100 and iou>=iou_thr:
+                            known_2_unknown = known_2_unknown+1
+                        if g_category_id != d_category_id and g_category_id == 100 and iou>=iou_thr:
+                            unknown_2_known = unknown_2_known+1
+            print("{}\t {}\t {}\t {}\t {}\t {}\t".format(
+                unknown_detected,unknown_undetected,known_detected,
+                known_undetected,known_2_unknown,unknown_2_known))
+
 
 
 
@@ -614,17 +636,9 @@ class ADE20kCOCODataset(CustomDataset):
                     val = float(f'{cocoEval.stats[i + 6]:.3f}')
                     eval_results[item] = val
             else:
-                ###debug xuma ###
-
-                cocoEval._prepare()
                 cocoEval.evaluate()
-                self.detail_analysis(cocoEval)
-                print("evalImgs is : {}".format(cocoEval.evalImgs))
-
-                print("cocoEval.params.iouType is {}".format(cocoEval.params.iouType))
-
-                ######
-                cocoEval.evaluate()
+                # Xu's detail analysis
+                self.detail_analysis(cocoEval, 0.5)
                 cocoEval.accumulate()
                 cocoEval.summarize()
                 if classwise:  # Compute per-category AP
