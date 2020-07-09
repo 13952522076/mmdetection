@@ -262,7 +262,7 @@ class ADE20kCOCODataset(CustomDataset):
             #     dt = cocoEval._dts[imageIds[i],categoryIds[j]]
             #     iou = cocoEval.computeIoU(i,j)
 
-        str = str + "\n\n___________________________all____________________________________\n\n"
+        str = str + "\n\n____________________________________all____________________________________________\n\n"
         str = str + "--\t {}\t {}\t {}\t {}\t {}\t {}\t " \
                     "{}\t {}\t {}\t {}\t \n".format(
             all_labeled_objects, all_detected_objects, all_known_num, all_unknown_num, all_known_detected, all_unknown_detected,
