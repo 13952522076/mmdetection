@@ -164,6 +164,25 @@ class ADE20kCOCODataset(CustomDataset):
         }
         return cat_mapping[cat_id]
 
+    def detail_analysis(self,cocoEval):
+        imageIds = cocoEval.params.imgIds
+        categoryIds = cocoEval.params.catIds
+        for i in range(0,len(imageIds)):
+            all_dt = [_ for cId in cocoEval.params.catIds for _ in cocoEval._dts[imageIds[i], cId]]
+            all_gt = [_ for cId in cocoEval.params.catIds for _ in cocoEval._gts[imageIds[i], cId]]
+            for g in all_gt:
+                for d in all_dt:
+                    iou = cocoEval.maskUtils.iou(d, g, 0)
+                    print(iou)
+
+
+
+            # for j in range(0,len(categoryIds)):
+            #     gt = cocoEval._gts[imageIds[i],categoryIds[j]]
+            #     dt = cocoEval._dts[imageIds[i],categoryIds[j]]
+            #     iou = cocoEval.computeIoU(i,j)
+
+
 
     def load_annotations(self, ann_file):
         """Load annotation from COCO style annotation file.
@@ -593,6 +612,7 @@ class ADE20kCOCODataset(CustomDataset):
 
                 cocoEval._prepare()
                 cocoEval.evaluate()
+                self.detail_analysis(cocoEval)
                 print("evalImgs is : {}".format(cocoEval.evalImgs))
 
                 print("cocoEval.params.iouType is {}".format(cocoEval.params.iouType))
