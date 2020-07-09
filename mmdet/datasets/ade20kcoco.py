@@ -8,6 +8,7 @@ import numpy as np
 from mmcv.utils import print_log
 from pycocotools.coco import COCO
 from pycocotools.cocoeval import COCOeval
+import pycocotools.mask as maskUtils
 from terminaltables import AsciiTable
 
 from mmdet.core import eval_recalls
@@ -164,16 +165,21 @@ class ADE20kCOCODataset(CustomDataset):
         }
         return cat_mapping[cat_id]
 
-    def detail_analysis(self,cocoEval):
+    def detail_analysis(self,cocoEval,iou_thr=0.5):
         imageIds = cocoEval.params.imgIds
         categoryIds = cocoEval.params.catIds
         for i in range(0,len(imageIds)):
             all_dt = [_ for cId in cocoEval.params.catIds for _ in cocoEval._dts[imageIds[i], cId]]
             all_gt = [_ for cId in cocoEval.params.catIds for _ in cocoEval._gts[imageIds[i], cId]]
-            for g in all_gt:
-                for d in all_dt:
-                    iou = cocoEval.maskUtils.iou(d, g, 0)
-                    print(iou)
+            if len(all_gt) !=0 and len(all_dt)!=0:
+                for g in all_gt:
+                    for d in all_dt:
+                        iou = maskUtils.iou(d, g, 0)
+                        g_category_id = g['category_id']
+                        d_category_id = g['category_id']
+                        print(iou)
+            else:
+                print(None)
 
 
 
