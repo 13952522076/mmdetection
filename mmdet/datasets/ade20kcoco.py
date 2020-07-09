@@ -184,20 +184,38 @@ class ADE20kCOCODataset(CustomDataset):
                         iou = maskUtils.iou([d['segmentation']], [g['segmentation']], [0])[0][0]
                         g_category_id = g['category_id']
                         d_category_id = g['category_id']
-                        if g_category_id==d_category_id and g_category_id==100:
-                            if iou>=iou_thr:
-                                unknown_detected = unknown_detected+1
-                            else:
-                                unknown_undetected = unknown_undetected+1
-                        if g_category_id == d_category_id and g_category_id != 100:
-                            if iou>=iou_thr:
-                                known_detected = known_detected+1
-                            else:
-                                known_undetected = known_undetected+1
-                        if g_category_id != d_category_id and g_category_id != 100 and iou>=iou_thr:
-                            known_2_unknown = known_2_unknown+1
-                        if g_category_id != d_category_id and g_category_id == 100 and iou>=iou_thr:
-                            unknown_2_known = unknown_2_known+1
+
+                        if g_category_id == d_category_id and g_category_id == 100 and iou>=iou_thr:
+                            unknown_detected = unknown_detected + 1
+                            continue
+                        if g_category_id == d_category_id and g_category_id != 100 and iou>=iou_thr:
+                            known_detected = known_detected + 1
+                            continue
+                        if iou>=iou_thr:
+                            if g_category_id==100 and d_category_id!=100:
+                                unknown_2_known = unknown_2_known+1
+                            if g_category_id != 100 and d_category_id == 100:
+                                known_2_unknown = known_2_unknown+1
+
+
+
+
+
+
+                        # if g_category_id==d_category_id and g_category_id==100:
+                        #     if iou>=iou_thr:
+                        #         unknown_detected = unknown_detected+1
+                        #     else:
+                        #         unknown_undetected = unknown_undetected+1
+                        # if g_category_id == d_category_id and g_category_id != 100:
+                        #     if iou>=iou_thr:
+                        #         known_detected = known_detected+1
+                        #     else:
+                        #         known_undetected = known_undetected+1
+                        # if g_category_id != d_category_id and g_category_id != 100 and iou>=iou_thr:
+                        #     known_2_unknown = known_2_unknown+1
+                        # if g_category_id != d_category_id and g_category_id == 100 and iou>=iou_thr:
+                        #     unknown_2_known = unknown_2_known+1
             print("{}\t {}\t {}\t {}\t {}\t {}\t".format(
                 unknown_detected,unknown_undetected,known_detected,
                 known_undetected,known_2_unknown,unknown_2_known))
