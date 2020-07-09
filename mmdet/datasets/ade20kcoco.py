@@ -176,8 +176,8 @@ class ADE20kCOCODataset(CustomDataset):
         all_unknown_2_known = 0
         all_detected_objects = 0
         all_labeled_objects = 0
-        str = "image_id\t grouth_truth_num\t detected_num\t known_detected\t unknown_detected\t " \
-              "known_undetected\t unknown_undetected\t known_2_unknown\t unknown_2_known\t \n"
+        str = "img_id\t gt\t dt\t k_det\t unk_det\t " \
+              "k_undet\t unk_undet\t k_2_unk\t unk_2_k\t \n"
 
         for i in range(0,len(imageIds)):
 
@@ -199,15 +199,15 @@ class ADE20kCOCODataset(CustomDataset):
                         g_category_id = g['category_id']
                         d_category_id = g['category_id']
 
-                        if g_category_id == d_category_id and g_category_id == 100 and iou>=iou_thr:
+                        if g_category_id == d_category_id and g_category_id == 100 and iou >= iou_thr:
                             unknown_detected = unknown_detected + 1
                             unknown_undetected = unknown_undetected -1
-                            continue
-                        if g_category_id == d_category_id and g_category_id != 100 and iou>=iou_thr:
+                            break
+                        if g_category_id == d_category_id and g_category_id != 100 and iou >= iou_thr:
                             known_detected = known_detected + 1
                             known_undetected = known_undetected -1
-                            continue
-                        if iou>=iou_thr:
+                            break
+                        if iou >= iou_thr:
                             if g_category_id==100 and d_category_id!=100:
                                 unknown_2_known = unknown_2_known+1
                             if g_category_id != 100 and d_category_id == 100:
@@ -258,7 +258,7 @@ class ADE20kCOCODataset(CustomDataset):
             #     dt = cocoEval._dts[imageIds[i],categoryIds[j]]
             #     iou = cocoEval.computeIoU(i,j)
 
-        str = str + "\n\n___________________________all__________________________________\n"
+        str = str + "\n\n___________________________all____________________________________\n\n"
         str = str + "--\t {}\t {}\t {}\t {}\t " \
                     "{}\t {}\t {}\t {}\t \n".format(
             all_labeled_objects, all_detected_objects, all_known_detected, all_unknown_detected,
