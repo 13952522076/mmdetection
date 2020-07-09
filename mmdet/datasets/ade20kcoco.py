@@ -176,7 +176,9 @@ class ADE20kCOCODataset(CustomDataset):
         all_unknown_2_known = 0
         all_detected_objects = 0
         all_labeled_objects = 0
-        str = "img_id\t gt\t dt\t k_d\t uk_d\t " \
+        all_known_num = 0
+        all_unknown_num = 0
+        str = "img_id\t gt\t dt\t k\t uk\t k_d\t uk_d\t " \
               "k_ud\t uk_ud\t k_2_uk\t uk_2_k\t \n"
 
         for i in range(0,len(imageIds)):
@@ -185,7 +187,9 @@ class ADE20kCOCODataset(CustomDataset):
             all_dt = [_ for cId in cocoEval.params.catIds for _ in cocoEval._dts[imageIds[i], cId]]
             all_gt = [_ for cId in cocoEval.params.catIds for _ in cocoEval._gts[imageIds[i], cId]]
             unknown_undetected = len([gt for gt in all_gt if gt['category_id'] == 100])
+            unknown_num = unknown_undetected
             known_undetected = len([gt for gt in all_gt if gt['category_id'] != 100])
+            known_num = known_undetected
             unknown_detected = 0
             known_detected = 0
             known_2_unknown = 0
@@ -244,9 +248,9 @@ class ADE20kCOCODataset(CustomDataset):
 
 
 
-            str = str + "{}\t {}\t {}\t {}\t {}\t " \
+            str = str + "{}\t {}\t {}\t {}\t {}\t {}\t {}\t " \
                         "{}\t {}\t {}\t {}\t \n".format(
-                imageIds[i],labeled_objects,detected_objects,known_detected,unknown_detected,
+                imageIds[i],labeled_objects,detected_objects,known_num, unknown_num,known_detected,unknown_detected,
                 known_undetected,unknown_undetected,known_2_unknown,unknown_2_known
             )
 
@@ -259,9 +263,9 @@ class ADE20kCOCODataset(CustomDataset):
             #     iou = cocoEval.computeIoU(i,j)
 
         str = str + "\n\n___________________________all____________________________________\n\n"
-        str = str + "--\t {}\t {}\t {}\t {}\t " \
+        str = str + "--\t {}\t {}\t {}\t {}\t {}\t {}\t " \
                     "{}\t {}\t {}\t {}\t \n".format(
-            all_labeled_objects, all_detected_objects, all_known_detected, all_unknown_detected,
+            all_labeled_objects, all_detected_objects, all_known_num, all_unknown_num, all_known_detected, all_unknown_detected,
             all_known_undetected, all_unknown_undetected, all_known_2_unknown, all_unknown_2_known
         )
         print(str)
