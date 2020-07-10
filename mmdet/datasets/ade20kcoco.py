@@ -697,7 +697,7 @@ class ADE20kCOCODataset(CustomDataset):
             else:
                 cocoEval.evaluate()
                 # Xu's detail analysis
-                self.detail_analysis(cocoEval, 0.5)
+                # self.detail_analysis(cocoEval, 0.5)
                 cocoEval.accumulate()
                 cocoEval.summarize()
                 if classwise:  # Compute per-category AP
