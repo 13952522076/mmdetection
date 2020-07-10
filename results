@@ -115,3 +115,84 @@ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.073
 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.064
 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.082
 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.080
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+_____________________________________________________________________________
+instance_validation_unknown_23classes.json: @ score_thr=0.0001
+Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.200
+Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.346
+Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.197
+Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.074
+Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.253
+Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.314
+Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.231
+Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.349
+Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.368
+Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.182
+Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.420
+Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.474
+
+
+instance_validation_unknown_23classes.json: @ score_thr=0.001
+Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.200
+Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.345
+Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.196
+Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.073
+Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.252
+Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.314
+Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.229
+Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.343
+Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.359
+Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.174
+Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.410
+Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.469
+
+instance_validation_unknown_23classes.json: @ score_thr=0.005
+#files: 2000, #instances: 22648
+Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.199
+Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.342
+Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.196
+Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.072
+Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.251
+Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.314
+Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.225
+Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.327
+Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.339
+Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.155
+Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.390
+Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.463
+
+instance_validation_unknown_23classes.json: @ score_thr=0.01
+Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.200
+Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.345
+Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.196
+Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.073
+Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.252
+Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.314
+Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.229
+Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.343
+Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.359
+Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.174
+Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.410
+Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.469
+
