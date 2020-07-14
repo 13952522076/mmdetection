@@ -291,81 +291,104 @@ class ADE20kCOCODataset(CustomDataset):
 
             all_dt = [_ for cId in cocoEval.params.catIds for _ in cocoEval._dts[imageIds[i], cId]]
             all_gt = [_ for cId in cocoEval.params.catIds for _ in cocoEval._gts[imageIds[i], cId]]
-            unknown_undetected = len([gt for gt in all_gt if gt['category_id'] == 100])
-            unknown_num = unknown_undetected
-            known_undetected = len([gt for gt in all_gt if gt['category_id'] != 100])
-            known_num = known_undetected
-            unknown_detected = 0
-            known_detected = 0
-            known_2_unknown = 0
-            unknown_2_known = 0
-            detected_objects = len(all_dt)
-            labeled_objects = len(all_gt)
             if len(all_gt) != 0 and len(all_dt) != 0:
                 for g in all_gt:
-                    for d in all_dt:
-                        iou = maskUtils.iou([d['segmentation']], [g['segmentation']], [0])[0][0]
-                        g_category_id = g['category_id']
-                        d_category_id = g['category_id']
+                    iou = 0
+                    detected_id = 0
+                    if g_category_id == 82:
+                        if len(all_dt)!=0:
+                            for d in all_dt:
+                                iou = maskUtils.iou([d['segmentation']], [g['segmentation']], [0])[0][0]
+                                g_category_id = g['category_id']
+                                d_category_id = d['category_id']
+                                if iou >= iou_thr:
+                                    detected_id = d_category_id
+                                    break;
+                        print("Image: {}\t  gt: {}\t detected: {}\t".format(imageIds[i],g['category_id'],detected_id))
 
-                        if g_category_id == d_category_id and g_category_id == 100 and iou >= iou_thr:
-                            unknown_detected = unknown_detected + 1
-                            unknown_undetected = unknown_undetected - 1
-                            break
-                        if g_category_id == d_category_id and g_category_id != 100 and iou >= iou_thr:
-                            known_detected = known_detected + 1
-                            known_undetected = known_undetected - 1
-                            break
-                        if iou >= iou_thr:
-                            if g_category_id == 100 and d_category_id != 100:
-                                unknown_2_known = unknown_2_known + 1
-                            if g_category_id != 100 and d_category_id == 100:
-                                known_2_unknown = known_2_unknown + 1
 
-                        # if g_category_id==d_category_id and g_category_id==100:
-                        #     if iou>=iou_thr:
-                        #         unknown_detected = unknown_detected+1
-                        #     else:
-                        #         unknown_undetected = unknown_undetected+1
-                        # if g_category_id == d_category_id and g_category_id != 100:
-                        #     if iou>=iou_thr:
-                        #         known_detected = known_detected+1
-                        #     else:
-                        #         known_undetected = known_undetected+1
-                        # if g_category_id != d_category_id and g_category_id != 100 and iou>=iou_thr:
-                        #     known_2_unknown = known_2_unknown+1
-                        # if g_category_id != d_category_id and g_category_id == 100 and iou>=iou_thr:
-                        #     unknown_2_known = unknown_2_known+1
 
-            all_unknown_undetected = all_unknown_undetected + unknown_undetected
-            all_unknown_detected = all_unknown_detected + unknown_detected
-            all_known_undetected = all_known_undetected + known_undetected
-            all_known_detected = all_known_detected + known_detected
-            all_known_2_unknown = all_known_2_unknown + known_2_unknown
-            all_unknown_2_known = all_unknown_2_known + unknown_2_known
-            all_detected_objects = all_detected_objects + detected_objects
-            all_labeled_objects = all_labeled_objects + labeled_objects
 
-            str = str + "{}\t {}\t {}\t {}\t {}\t {}\t {}\t " \
-                        "{}\t {}\t {}\t {}\t \n".format(
-                imageIds[i], labeled_objects, detected_objects, known_num, unknown_num, known_detected,
-                unknown_detected,
-                known_undetected, unknown_undetected, known_2_unknown, unknown_2_known
-            )
 
-            # for j in range(0,len(categoryIds)):
-            #     gt = cocoEval._gts[imageIds[i],categoryIds[j]]
-            #     dt = cocoEval._dts[imageIds[i],categoryIds[j]]
-            #     iou = cocoEval.computeIoU(i,j)
 
-        str = str + "\n\n____________________________________all____________________________________________\n\n"
-        str = str + "--\t {}\t {}\t {}\t {}\t {}\t {}\t " \
-                    "{}\t {}\t {}\t {}\t \n".format(
-            all_labeled_objects, all_detected_objects, all_known_num, all_unknown_num, all_known_detected,
-            all_unknown_detected,
-            all_known_undetected, all_unknown_undetected, all_known_2_unknown, all_unknown_2_known
-        )
-        print(str)
+
+
+
+        #     unknown_undetected = len([gt for gt in all_gt if gt['category_id'] == 100])
+        #     unknown_num = unknown_undetected
+        #     known_undetected = len([gt for gt in all_gt if gt['category_id'] != 100])
+        #     known_num = known_undetected
+        #     unknown_detected = 0
+        #     known_detected = 0
+        #     known_2_unknown = 0
+        #     unknown_2_known = 0
+        #     detected_objects = len(all_dt)
+        #     labeled_objects = len(all_gt)
+        #     if len(all_gt) != 0 and len(all_dt) != 0:
+        #         for g in all_gt:
+        #             for d in all_dt:
+        #                 iou = maskUtils.iou([d['segmentation']], [g['segmentation']], [0])[0][0]
+        #                 g_category_id = g['category_id']
+        #                 d_category_id = d['category_id']
+        #
+        #                 if g_category_id == d_category_id and g_category_id == 100 and iou >= iou_thr:
+        #                     unknown_detected = unknown_detected + 1
+        #                     unknown_undetected = unknown_undetected - 1
+        #                     break
+        #                 if g_category_id == d_category_id and g_category_id != 100 and iou >= iou_thr:
+        #                     known_detected = known_detected + 1
+        #                     known_undetected = known_undetected - 1
+        #                     break
+        #                 if iou >= iou_thr:
+        #                     if g_category_id == 100 and d_category_id != 100:
+        #                         unknown_2_known = unknown_2_known + 1
+        #                     if g_category_id != 100 and d_category_id == 100:
+        #                         known_2_unknown = known_2_unknown + 1
+        #
+        #                 # if g_category_id==d_category_id and g_category_id==100:
+        #                 #     if iou>=iou_thr:
+        #                 #         unknown_detected = unknown_detected+1
+        #                 #     else:
+        #                 #         unknown_undetected = unknown_undetected+1
+        #                 # if g_category_id == d_category_id and g_category_id != 100:
+        #                 #     if iou>=iou_thr:
+        #                 #         known_detected = known_detected+1
+        #                 #     else:
+        #                 #         known_undetected = known_undetected+1
+        #                 # if g_category_id != d_category_id and g_category_id != 100 and iou>=iou_thr:
+        #                 #     known_2_unknown = known_2_unknown+1
+        #                 # if g_category_id != d_category_id and g_category_id == 100 and iou>=iou_thr:
+        #                 #     unknown_2_known = unknown_2_known+1
+        #
+        #     all_unknown_undetected = all_unknown_undetected + unknown_undetected
+        #     all_unknown_detected = all_unknown_detected + unknown_detected
+        #     all_known_undetected = all_known_undetected + known_undetected
+        #     all_known_detected = all_known_detected + known_detected
+        #     all_known_2_unknown = all_known_2_unknown + known_2_unknown
+        #     all_unknown_2_known = all_unknown_2_known + unknown_2_known
+        #     all_detected_objects = all_detected_objects + detected_objects
+        #     all_labeled_objects = all_labeled_objects + labeled_objects
+        #
+        #     str = str + "{}\t {}\t {}\t {}\t {}\t {}\t {}\t " \
+        #                 "{}\t {}\t {}\t {}\t \n".format(
+        #         imageIds[i], labeled_objects, detected_objects, known_num, unknown_num, known_detected,
+        #         unknown_detected,
+        #         known_undetected, unknown_undetected, known_2_unknown, unknown_2_known
+        #     )
+        #
+        #     # for j in range(0,len(categoryIds)):
+        #     #     gt = cocoEval._gts[imageIds[i],categoryIds[j]]
+        #     #     dt = cocoEval._dts[imageIds[i],categoryIds[j]]
+        #     #     iou = cocoEval.computeIoU(i,j)
+        #
+        # str = str + "\n\n____________________________________all____________________________________________\n\n"
+        # str = str + "--\t {}\t {}\t {}\t {}\t {}\t {}\t " \
+        #             "{}\t {}\t {}\t {}\t \n".format(
+        #     all_labeled_objects, all_detected_objects, all_known_num, all_unknown_num, all_known_detected,
+        #     all_unknown_detected,
+        #     all_known_undetected, all_unknown_undetected, all_known_2_unknown, all_unknown_2_known
+        # )
+        # print(str)
 
 
 
