@@ -185,4 +185,5 @@ data = dict(
         img_prefix=data_root + '/images/validation/',
         pipeline=test_pipeline))
 evaluation = dict(metric=['segm'])
+resume_from = './work_dirs/mask_rcnn_r50_fpn_2x_ade20k_465/ epoch_16.pth'
 work_dir = './work_dirs/mask_rcnn_r50_fpn_2x_ade20k_465'
