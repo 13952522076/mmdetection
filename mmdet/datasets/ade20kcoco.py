@@ -564,6 +564,7 @@ class ADE20kCOCODataset(CustomDataset):
                     data['bbox'] = self.xyxy2xywh(bboxes[i])
                     data['score'] = float(bboxes[i][4])
                     cat_id = self.cat_ids[label]
+                    data['category_id'] = cat_id
                     # data['category_id'] = self._cocoid2adeid(cat_id)
                     # if data['category_id'] !=100:
                     #     continue # here we just focus on unkown objetcts
@@ -586,6 +587,7 @@ class ADE20kCOCODataset(CustomDataset):
                     data['bbox'] = self.xyxy2xywh(bboxes[i])
                     data['score'] = float(bboxes[i][4])
                     cat_id = self.cat_ids[label]
+                    data['category_id'] = cat_id
                     # data['category_id'] = self._cocoid2adeid(cat_id)
                     # # if data['category_id'] !=100:
                     # #     continue # here we just focus on unkown objetcts
@@ -605,6 +607,7 @@ class ADE20kCOCODataset(CustomDataset):
                     data['bbox'] = self.xyxy2xywh(bboxes[i])
                     data['score'] = float(mask_score[i])
                     cat_id = self.cat_ids[label]
+                    data['category_id'] = cat_id
                     # data['category_id'] = self._cocoid2adeid(cat_id)
                     # # if data['category_id'] !=100:
                     # #     continue # here we just focus on unkown objetcts
