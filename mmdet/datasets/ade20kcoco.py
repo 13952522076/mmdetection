@@ -295,11 +295,12 @@ class ADE20kCOCODataset(CustomDataset):
                 for g in all_gt:
                     iou = 0
                     detected_id = 0
+                    g_category_id = g['category_id']
                     if g_category_id == 82:
                         if len(all_dt)!=0:
                             for d in all_dt:
                                 iou = maskUtils.iou([d['segmentation']], [g['segmentation']], [0])[0][0]
-                                g_category_id = g['category_id']
+
                                 d_category_id = d['category_id']
                                 if iou >= iou_thr:
                                     detected_id = d_category_id
