@@ -297,8 +297,8 @@ class ADE20kCOCODataset(CustomDataset):
                                     if d_category_id in coco_animal_id:
                                         matched = True
                                     break
-                        print("Image: {}\t  gt: {}\t detected: {}\t IoU: {}\t score: {}\t match: {}\t".
-                              format(imageIds[i], g['category_id'], iou, detected_id, d_score, matched))
+                        print("Image: {}\t  gt: {}\t detected: {}\t IoU: {:0.4f}\t score: {}\t match: {}\t".
+                              format(imageIds[i], g['category_id'], detected_id, iou, d_score, matched))
 
 
 
