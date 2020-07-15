@@ -300,6 +300,23 @@ class ADE20kCOCODataset(CustomDataset):
                         print("Image: {}\t  gt: {}\t detected: {}\t IoU: {:0.4f}\t score: {}\t match: {}\t".
                               format(imageIds[i], g['category_id'], detected_id, iou, d_score, matched))
 
+            if len(all_dt) != 0:
+                for d in all_dt:
+                    iou = 0
+                    g_category_id = None
+                    d_score = None
+                    matched = False
+                    d_category_id = d['category_id']
+                    if d_category_id in coco_animal_id:
+                        if len(all_gt) != 0:
+                            for g in all_gt:
+                                iou = maskUtils.iou([d['segmentation']], [g['segmentation']], [0])[0][0]
+                                g_category_id = g['category_id']
+                                if g_category_id !=82 and iou > 0:
+                                    d_score = str(d['score'])[:5]
+                                    print("Image: {}\t  gt: {}\t detected: {}\t IoU: {:0.4f}\t score: {}\t match: {}\t".
+                                          format(imageIds[i], g_category_id, d_category_id, iou, d_score, matched))
+
 
 
 
