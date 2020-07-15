@@ -292,13 +292,12 @@ class ADE20kCOCODataset(CustomDataset):
                                 iou = maskUtils.iou([d['segmentation']], [g['segmentation']], [0])[0][0]
                                 d_category_id = d['category_id']
                                 if iou > 0:
-                                    d_score = d['score']
-                                    print(type(d_score))
+                                    d_score = str(d['score'])[:5]
                                     detected_id = d_category_id
                                     if d_category_id in coco_animal_id:
                                         matched = True
                                     break
-                        print("Image: {}\t  gt: {}\t detected: {}\t score: {:0.3f}\t match: {}\t".
+                        print("Image: {}\t  gt: {}\t detected: {}\t score: {}\t match: {}\t".
                               format(imageIds[i], g['category_id'], detected_id, d_score, matched))
 
 
