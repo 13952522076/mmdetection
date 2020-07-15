@@ -271,21 +271,9 @@ class ADE20kCOCODataset(CustomDataset):
         print(str)
 
 
-    def sup_sub_classes_analysis(self,cocoEval, iou_thr=0.5):
+    def sup_sub_classes_analysis(self,cocoEval, iou_thr=0.3):
         imageIds = cocoEval.params.imgIds
-        # categoryIds = cocoEval.params.catIds
-        # all_unknown_undetected = 0
-        # all_unknown_detected = 0
-        # all_known_undetected = 0
-        # all_known_detected = 0
-        # all_known_2_unknown = 0
-        # all_unknown_2_known = 0
-        # all_detected_objects = 0
-        # all_labeled_objects = 0
-        # all_known_num = 0
-        # all_unknown_num = 0
-        # str = "img_id\t gt\t dt\t k\t uk\t k_d\t uk_d\t " \
-        #       "k_ud\t uk_ud\t k_2_uk\t uk_2_k\t \n"
+
         coco_animal_id = [15,16,17,18,19,20,21,22,23,24]
         for i in range(0, len(imageIds)):
 
@@ -307,8 +295,8 @@ class ADE20kCOCODataset(CustomDataset):
                                 if iou >= iou_thr:
                                     detected_id = d_category_id
                                     if d_category_id in coco_animal_id:
-                                        matched=True
-                                    break;
+                                        matched = True
+                                    break
                         print("Image: {}\t  gt: {}\t detected: {}\t score: {}\t match: {}\t".
                               format(imageIds[i],g['category_id'],detected_id,d_score,matched))
 
