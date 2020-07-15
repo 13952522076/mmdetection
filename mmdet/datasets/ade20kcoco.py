@@ -271,7 +271,7 @@ class ADE20kCOCODataset(CustomDataset):
         print(str)
 
 
-    def sup_sub_classes_analysis(self,cocoEval, iou_thr=0.3):
+    def sup_sub_classes_analysis(self,cocoEval):
         imageIds = cocoEval.params.imgIds
 
         coco_animal_id = [15,16,17,18,19,20,21,22,23,24]
@@ -279,20 +279,20 @@ class ADE20kCOCODataset(CustomDataset):
 
             all_dt = [_ for cId in cocoEval.params.catIds for _ in cocoEval._dts[imageIds[i], cId]]
             all_gt = [_ for cId in cocoEval.params.catIds for _ in cocoEval._gts[imageIds[i], cId]]
-            if len(all_gt) != 0 and len(all_dt) != 0:
+            if len(all_gt) != 0:
                 for g in all_gt:
                     iou = 0
-                    detected_id = 0
-                    d_score = 0
+                    detected_id = None
+                    d_score = None
                     matched = False
                     g_category_id = g['category_id']
                     if g_category_id == 82:
-                        if len(all_dt)!=0:
+                        if len(all_dt) != 0:
                             for d in all_dt:
                                 iou = maskUtils.iou([d['segmentation']], [g['segmentation']], [0])[0][0]
-                                d_score = d['score']
                                 d_category_id = d['category_id']
-                                if iou >= iou_thr:
+                                if iou > 0:
+                                    d_score = d['score']
                                     detected_id = d_category_id
                                     if d_category_id in coco_animal_id:
                                         matched = True
